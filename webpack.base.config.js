@@ -22,7 +22,7 @@ const localIp = (() => {
         for (let i = 0; i < ntwk[k].length; i++) {
             let _add = ntwk[k][i].address;
             if (_add && _add.split('.').length == 4 && !ntwk[k][i].internal && ntwk[k][i].family == 'IPv4') {
-                ips.push(ntwk[k][i].address);
+				ips.push(ntwk[k][i].address);
             }
         }
     }
@@ -32,14 +32,12 @@ const defaultConfig = {
     // cheap-module-eval-source-map 原始源码（仅限行）
     // cheap-eval-source-map 转换过的代码（仅限行）// 重构建比较好
     devtool: ENV_IS_DEV ? 'cheap-module-eval-source-map' : undefined,
-    resolve: {
-        extensions: ['.jsx', '.js']
-    },
     devServer: {
         host: localIp,
         contentBase: "/",
         port: localPort,
         inline: true,
+        // autoOpenBrowser: true,
         // compress: true, // gzip
         stats: 'errors-only',
         historyApiFallback: true,
@@ -85,15 +83,10 @@ const baseConfig = {
             'react-redux': path.resolve(APP_ROOT, 'node_modules/react-redux/dist/react-redux.min.js'),
             'react-router-redux': path.resolve(APP_ROOT, 'node_modules/react-router-redux/dist/ReactRouterRedux.min.js'),
             'redux-thunk': path.resolve(APP_ROOT, 'node_modules/redux-thunk/dist/redux-thunk.min.js'),
-            // 'rc-form/lib': path.resolve(APP_ROOT, 'node_modules/rc-form/lib'),
-            // 'rc-form': path.resolve(APP_ROOT, 'node_modules/rc-form/dist/rc-form.min.js'),
             'redux': path.resolve(APP_ROOT, 'node_modules/redux/dist/redux.min.js'),
-            // 'immutable': path.resolve(APP_ROOT, 'node_modules/immutable/dist/immutable.min.js'),
             'babel-polyfill': path.resolve(APP_ROOT, 'node_modules/babel-polyfill/dist/polyfill.min.js'),
-            // 'lrz': path.resolve(APP_ROOT, 'node_modules/lrz/dist/lrz.all.bundle.js'),
             // 其他
-            // 'pure-render-decorator': path.resolve(APP_ROOT, 'src/pages/utils/pure-render-decorator'),
-            // '@'								: path.resolve(APP_ROOT, 'src/pages'),
+            // '@': path.resolve(APP_ROOT, 'src/pages'),
             // '@common': path.resolve(APP_ROOT, 'src/pages/components/_common'),
             // 主端
             // '@actions': path.resolve(APP_ROOT, 'src/pages/actions'),
@@ -107,31 +100,40 @@ const baseConfig = {
         app: [
             './src/main.js'
         ],
-        // common: [
-        //     'react',
-        //     'react-dom',
-        //     'react-router-dom',
-        //     'babel-polyfill',
-        //     'redux',
-        //     'redux-thunk',
-        //     'react-router-redux',
-        //     'classnames',
-        // ]
     },
     optimization: {
+        // 默认关闭压缩
+        minimize: ENV_IS_DEV ? false : true,
+        // 原：NamedModulesPlugin()
+        namedModules: true,
+        // 原：NoEmitOnErrorsPlugin() - 异常继续执行
+        noEmitOnErrors: true,
+        // 原：ModuleConcatenationPlugin() - 模块串联 - dev模式下回影响antd（比如：Pagination, 和语言有关）
+        concatenateModules: !ENV_IS_DEV,
+        // 原：CommonsChunkPlugin()
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    test: /node_modules/,
-                    chunks: 'initial',
+                    test: chunk => {
+                        const modules = [
+                            'babel-polyfill',
+                            'react',
+                            'react-dom',
+                            'react-redux',
+                            'react-router',
+                            'react-router-redux',
+                            'redux',
+                            'redux-thunk',
+                            'classnames',
+                        ];
+                        let isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
+                        return chunk.resource
+                            && /\.js$/.test(chunk.resource)
+                            && isInModules;
+                    },
+                    chunks: 'all',
                     name: 'vendors',
                 },
-                common: {
-                    chunks: "initial",
-                    minChunks: 2,
-                    maxInitialRequests: 5,
-                    minSize: 0
-                }
             }
         },
         runtimeChunk: { name: 'runtime' }
@@ -140,19 +142,21 @@ const baseConfig = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].[hash:8].bundle.js',  // 每个页面对应的主js的生成配置
-        chunkFilename: 'js/[name].[hash:8].chunk.js',  // chunk生成的配置
-        sourceMapFilename: 'js/[name].[hash:8].bundle.map',
+        filename: 'static/js/[name].[hash:8].bundle.js',  // 每个页面对应的主js的生成配置
+        chunkFilename: 'static/js/[name].[hash:8].chunk.js',  // chunk生成的配置
+        sourceMapFilename: 'static/js/[name].[hash:8].bundle.map',
     },
-    
+
     // 插件
     plugins: [
+        //单独抽离css文件
         new ExtractTextPlugin({
-            filename: 'css/initial.[name].[hash:8].css',
+            filename: 'static/css/initial.[name].[hash:8].css',
             allChunks: true
         }),
+
         new webpack.NoEmitOnErrorsPlugin(),
-    ],     
+    ],
     // 模块
     module: {
         exprContextCritical: false,
@@ -170,15 +174,42 @@ const baseConfig = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader']
+                })
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: "less-loader",
+                        options: {
+                            javascriptEnabled: true
+                        }
+                    }
+                ],
+
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                // use: ['style-loader', 'css-loader', 'sass-loader'],
+                include: [path.resolve(APP_ROOT, "src/css")],
+                exclude: [path.resolve(APP_ROOT, "node_modules"), path.resolve(APP_ROOT, "src/pages")],
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
             },
             {
-                test: /\.(png|jpg|gif|eot|ttf|woff|woff2)$/,
-                use: ['file-loader']
+                test: /\.(png|jpg|gif)$/,
+                use: 'file-loader?name=static/images/[hash:8].[name].[ext]'
+            },
+            {
+                test: /\.(eot|ttf|woff|woff2)$/,
+                use: 'file-loader?name=static/fonts/[hash:8].[name].[ext]'
             },
 
         ]

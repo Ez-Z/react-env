@@ -13,23 +13,21 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.base.config');
 
 let webpackConfig = {
+    mode: 'production',
     plugins: [
-		/**
-		 * 这里不用dev模式下的输出html，改用js输出是为了版本控制；index.html会造成缓存，导致即使js带hash无效（微信端是这样）
-		 * 需要屏蔽HtmlWebpackPlugin功能，即注释
-		 */
         new AssetsPlugin({
-            path: path.resolve(APP_ROOT, 'dist/js/'),
+            path: path.resolve(APP_ROOT, 'dist/static/js/'),
             filename: 'webpack-assets.js',
             processOutput: function (assets) {
                 return 'window.WEBPACK_ASSETS = ' + JSON.stringify(assets);
             }
         }),
+        
 		/**
 		 * 压缩同时转移静态文件
 		 */
         // new CopyWebpackPlugin([
-        //     { from: path.resolve(APP_ROOT, 'src/static'), to: '[name].[ext]', toType: 'template' },
+        //     { from: path.resolve(APP_ROOT, 'src/static'), to: path.resolve(APP_ROOT, 'dist/static')},
         // ]),
 		/**
 		 * 生产环境
@@ -38,8 +36,12 @@ let webpackConfig = {
             'process.env.NODE_ENV': JSON.stringify('production'),
             __DEV__: 'false'
         }),
+        /**
+         * 这里不用dev模式下的输出html，改用js输出是为了版本控制；index.html会造成缓存，导致即使js带hash无效（微信端是这样）
+         * 需要屏蔽HtmlWebpackPlugin功能，即注释
+         */
         new HtmlWebpackPlugin({
-            template: path.resolve(APP_ROOT, 'src/static/index.tpl.html'),
+            template: path.resolve(APP_ROOT, 'src/index.tpl.html'),
             inject: 'body',
             filename: './index.html'
         }),

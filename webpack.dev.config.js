@@ -13,12 +13,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.base.config');
 
 let webpackConfig = {
+    mode: 'development',
     plugins: [
 		/**
 		 * 输出html
 		 */
         new HtmlWebpackPlugin({
-            template: path.resolve(APP_ROOT, 'src/static/index.tpl.html'),
+            template: path.resolve(APP_ROOT, 'src/index.tpl.html'),
             // chunks: ['common', 'app'], // 当前路由所包含的模块，注意common引入方式
             inject: 'body',
             filename: './index.html'
