@@ -4,13 +4,6 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import {
-    bindActionCreators
-} from 'redux';
-import {
-    connect
-} from 'react-redux';
-
 import { Button } from 'antd';
 
 import { setCookie, getCookie } from '@utils/utils';
@@ -27,26 +20,20 @@ class Login extends Component {
         }
         this.handleClick = ::this.handleClick;
     }
-    componentWillMount() {
-        let isLogin = getCookie('isLogin');
-        if (isLogin) {
-            let userName = 'zsd';
-            this.props.actions.getLoginInfo({
-                isLogin,
-                userName
-            });
-        }
-    }
     handleClick() {
         setCookie('isLogin', true);
+        this.props.history.push({
+             pathname: '/',
+        });
     }
     render(){
-        const { from } = this.props.location.state || { from: { pathname: '/' } }
+        let isLogin = getCookie('isLogin');
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
         const { message } = this.state;
-        if (this.props.loginInfo.isLogin) {
+        if (isLogin) {
             return (
                 <Redirect to = {from}/>
-            )
+            );
         }
         
         return (
@@ -57,15 +44,5 @@ class Login extends Component {
         );
     }
 }
-function mapStateToProps(state) {
-    return {
-        loginInfo: state.loginInfo
-    };
-}
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(loginInfoAction, dispatch)
-    };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
