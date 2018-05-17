@@ -10,6 +10,8 @@ import Routes from './router/routes';
 import Header from '@common/Header';
 import Footer from '@common/Footer';
 
+
+
 class App extends Component {
     constructor(){
         super();
@@ -22,11 +24,13 @@ class App extends Component {
         let {
             message
         } = this.state;
+
+
         return (
             <Fragment>{/*片段，用于多个子元素的包裹，减少不必要的标签*/}
-                <Header name='111'></Header>
+                {location.href.indexOf('login') < 0 && <Header name='111'></Header>}
                 <Routes />
-                <Footer></Footer>
+                {location.href.indexOf('login') < 0 && <Footer></Footer>}
             </Fragment>
         );
     }

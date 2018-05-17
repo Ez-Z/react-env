@@ -10,6 +10,7 @@ import {
 import * as TestAction from '@actions/test/actions';
 import { Button } from 'antd';
 import trophy from '@images/trophy.png';
+import pureRender from 'pure-render-decorator';
 
 
 class Home extends Component {
@@ -30,12 +31,11 @@ class Home extends Component {
         let {
             message
         } = this.state;
-        // console.log(this.props)
-        
-        const { actions, test } = this.props;
+        // console.log(this.props);
+        const { actions, test, loginInfo } = this.props;
         return (
             <Fragment>{/*片段，用于多个子元素的包裹，减少不必要的标签*/}
-                <h1>{message}</h1>
+                <h1>{loginInfo.userName}</h1>
                 <img src={trophy} alt=""/>
                 {test.testData&&<h1>{test.testData}</h1>}
                 <Button type="primary" size='large' onClick={this.handleClick}>Primary</Button>
@@ -45,7 +45,8 @@ class Home extends Component {
 }
 function mapStateToProps(state) {
     return {
-        test: state.testMain
+        test: state.testMain,
+        loginInfo: state.loginInfo
     };
 }
 

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
 
-class App extends Component {
+class Test extends Component {
     constructor(){
         super();
         this.state = {
@@ -23,4 +23,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Test;

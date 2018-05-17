@@ -81,6 +81,7 @@ const baseConfig = {
             'react-dom/server': path.resolve(APP_ROOT, 'node_modules/react-dom/server'),
             'react-dom': path.resolve(APP_ROOT, 'node_modules/react-dom/cjs/react-dom.production.min.js'),
             'react-redux': path.resolve(APP_ROOT, 'node_modules/react-redux/dist/react-redux.min.js'),
+            'pure-render-decorator': path.resolve(APP_ROOT, 'src/utils/pure-render-decorator'),
             // 'react-router-redux': path.resolve(APP_ROOT, 'node_modules/react-router-redux/dist/ReactRouterRedux.min.js'),
             'redux-thunk': path.resolve(APP_ROOT, 'node_modules/redux-thunk/dist/redux-thunk.min.js'),
             'redux': path.resolve(APP_ROOT, 'node_modules/redux/dist/redux.min.js'),

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './Header.scss';
+import pureRender from 'pure-render-decorator';
+
 const Header = (props) => {
 	const {
 		name,
@@ -14,6 +16,7 @@ const Header = (props) => {
 				</Link>
 			</h1>
 			<div>
+
 				<span><Link to="/">Home</Link> </span>
 				<span><Link to="/test">test</Link> </span>
 				<span>

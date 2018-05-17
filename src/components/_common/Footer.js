@@ -1,4 +1,6 @@
 import React from 'react';
+import pureRender from 'pure-render-decorator';
+
 const Header = (props) => {
 	return (
 		<div className="common-footer">

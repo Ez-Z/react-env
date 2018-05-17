@@ -1,23 +1,21 @@
 import React, { Fragment } from 'react';
 import {
   Route
-} from 'react-router-dom'
-import LazyLoad from '@common/LazyLoad/LazyLoad';
+} from 'react-router-dom';
+import LazyLoad from '@common/LazyLoad/LazyLoad'; //按需加载容器组件
+import PrivateRoute from './PrivateRoute';
+
 
 const Home = LazyLoad(() => import('../containers/Home/Home'));
 const Test = LazyLoad(() => import('../containers/Test/Test'));
-// import Home from '@containers/Home/Home';
-// import Test from '@containers/Test/Test';
+const Login = LazyLoad(() => import('../containers/Login/Login'));
 
 const Routes = (props) => {
-	const {
-		name,
-		mobile,
-	} = props;
 	return (
 		<Fragment>
-			<Route exact path="/" component={Home}/>
-			<Route path="/test" component={Test}/>
+			<PrivateRoute exact path="/" component={Home} />
+			<PrivateRoute path="/test" component={Test} />
+			<Route path="/login" component={Login} />
 		</Fragment>
 	);
 };
