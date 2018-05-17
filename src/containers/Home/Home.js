@@ -1,0 +1,59 @@
+import React, {Component, Fragment} from 'react';
+import ReactDOM from 'react-dom';
+import {
+    bindActionCreators
+} from 'redux';
+import {
+    connect
+} from 'react-redux';
+
+import * as TestAction from '@actions/test/actions';
+import { Button } from 'antd';
+import trophy from '@images/trophy.png';
+
+
+class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+            message: "Hello, world!!"
+        }
+        this.handleClick = ::this.handleClick;
+    }
+    handleClick() {
+        this.props.actions.testAction('sss');
+        // this.props.history.push({
+        //      pathname: '/test',
+        // });
+    }
+    render(){
+        let {
+            message
+        } = this.state;
+        // console.log(this.props)
+        
+        const { actions, test } = this.props;
+        return (
+            <Fragment>{/*片段，用于多个子元素的包裹，减少不必要的标签*/}
+                <h1>{message}</h1>
+                <img src={trophy} alt=""/>
+                {test.testData&&<h1>{test.testData}</h1>}
+                <Button type="primary" size='large' onClick={this.handleClick}>Primary</Button>
+            </Fragment>
+        );
+    }
+}
+function mapStateToProps(state) {
+    return {
+        test: state.testMain
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(TestAction, dispatch)
+    };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

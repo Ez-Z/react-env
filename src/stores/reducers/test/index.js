@@ -1,4 +1,9 @@
 import { testMain } from './testMain';
-export const test = {
+
+
+const test = {
 	testMain
 };
+
+
+export default test;

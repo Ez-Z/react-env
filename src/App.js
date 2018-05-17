@@ -1,28 +1,37 @@
 import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from 'antd';
-import trophy from './static/images/trophy.png'
+import {
+    bindActionCreators
+} from 'redux';
+import {
+    connect
+} from 'react-redux';
+import Routes from './router/routes';
+import Header from '@common/Header';
+import Footer from '@common/Footer';
 
 class App extends Component {
     constructor(){
         super();
         this.state = {
-            message: "Hello, world!!+"
+            message: "Hello, world!!"
         }
     }
+    
     render(){
         let {
             message
         } = this.state;
-
         return (
             <Fragment>{/*片段，用于多个子元素的包裹，减少不必要的标签*/}
-            <h1>{message}</h1>
-            <img src={trophy} alt=""/>
-            <Button type="primary" size='large'>Primary</Button>
+                <Header name='111'></Header>
+                <Routes />
+                <Footer></Footer>
             </Fragment>
         );
     }
 }
+
+
 
 export default App;
