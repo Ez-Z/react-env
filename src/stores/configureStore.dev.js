@@ -12,11 +12,21 @@ function getDebugSessionKey() {
 	const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
 	return (matches && matches.length > 0) ? matches[1] : null;
 }
-let finalCreateStore = compose(
-	applyMiddleware(thunk),
-	DevTools.instrument(),
-	persistState(getDebugSessionKey())
-)(createStore);
+let finalCreateStore = null
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+if (composeEnhancers) {
+	finalCreateStore = composeEnhancers(
+		applyMiddleware(thunk),
+		persistState(getDebugSessionKey())
+	)(createStore);
+} else  {
+	finalCreateStore = compose(
+		applyMiddleware(thunk),
+		DevTools.instrument(),
+		persistState(getDebugSessionKey())
+	)(createStore);
+}
+
 
 export default function configureStore(initialState) {
 
