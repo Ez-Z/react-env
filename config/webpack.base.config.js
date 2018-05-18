@@ -97,9 +97,7 @@ const baseConfig = {
     },
     //入口
     entry: {
-        app: [
-            './src/main.js'
-        ],
+        app: path.resolve(APP_ROOT, 'src/main.js'),
     },
     optimization: {
         // 默认关闭压缩
@@ -140,7 +138,7 @@ const baseConfig = {
     // 出口
     output: {
         publicPath: '/',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(APP_ROOT, 'dist'),
         filename: 'statics/js/[name].[hash:8].bundle.js',  // 每个页面对应的主js的生成配置
         chunkFilename: 'statics/js/[name].[hash:8].chunk.js',  // chunk生成的配置
         sourceMapFilename: 'statics/js/[name].[hash:8].bundle.map',
