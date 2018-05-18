@@ -8,5 +8,6 @@
 
 打包： `npm run build`
 
+本地查看dist文件： `npm run distserve`
 
 
