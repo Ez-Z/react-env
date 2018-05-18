@@ -10,7 +10,6 @@
         "serve": "node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server --config  ./config/webpack.dev.config.js --color --progress --hot",
         "dist": "node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack --config ./config/webpack.dist.config.js --color --progress",
         "build": "npm run dist -- -p && npm run copy",
-        "build:dev": "npm run dist && npm run copy",
         "copy": "echo 'end'",
         "distserve": "node distServer/distServer.js"
     },
