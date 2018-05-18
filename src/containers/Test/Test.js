@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 
 
 class Test extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             message: "Hello, test"
         }
     }
-    render(){
+    render() {
         let {
             message
         } = this.state;

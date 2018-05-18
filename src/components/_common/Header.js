@@ -4,11 +4,11 @@ import './Header.scss';
 import pureRender from 'pure-render-decorator';
 @pureRender
 class Header extends Component {
-	constructor(){
+	constructor() {
         super();
     }
 	
-    render(){
+    render() {
     	const {
 			name,
 		} = this.props;

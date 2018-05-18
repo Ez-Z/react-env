@@ -13,7 +13,7 @@ import * as loginInfoAction from '@actions/loginInfo/actions';
 
 
 class Login extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             message: "Hello, login",
@@ -26,7 +26,7 @@ class Login extends Component {
              pathname: '/',
         });
     }
-    render(){
+    render() {
         let isLogin = getCookie('isLogin');
         const { from } = this.props.location.state || { from: { pathname: '/' } };
         const { message } = this.state;

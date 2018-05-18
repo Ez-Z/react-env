@@ -14,7 +14,7 @@ import pureRender from 'pure-render-decorator';
 
 
 class Home extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             message: "Hello, world!!"
@@ -27,7 +27,7 @@ class Home extends Component {
         //      pathname: '/test',
         // });
     }
-    render(){
+    render() {
         let {
             message
         } = this.state;
