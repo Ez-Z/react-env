@@ -200,7 +200,15 @@ const baseConfig = {
                 exclude: [path.resolve(APP_ROOT, "node_modules")],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'sass-loader']
+                    use: ['css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.resolve(APP_ROOT, 'config/postcss.config.js')
+                            }
+                        }
+                    }, 'sass-loader']
                 })
             },
             {

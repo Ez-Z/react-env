@@ -1,132 +1,99 @@
-/* @example
-	ajax({
-		url: APIROOT['_GLOBAL_USER_MAIN_'],
-		param: data,
-		type: 'GET',
-		success: function(data){
-			// alert(data);
-		},
-		error: function(xhr){
-		}
-	});
-
-**/
-// import { delItem, getCookie } from './utils';
+const axios = require('axios');
+// import $url from './url';
+import { delCookie } from './util';
 /**
- * ajax description
- * @param options ajax参数信息
+ * 
+ * 
+	this.$http({
+		method: 'post',
+		url: '/products',
+		data: {},
+	}).then((response) => {
+		console.log(response);
+		this.$Message.success({
+			content: 'sss',
+		});
+	}).catch((err) => {
+	});
  */
-const ajaxFn = (options) => {
-	console.log(options);
-	let xhr = new XMLHttpRequest();
-	let url = options.url;
-	let paramObj = options.param;
-	if (paramObj && paramObj.id) {
-		url += `/${paramObj.id}`;
-		paramObj = {
-			...paramObj,
-			id: null
-		};
-	}
-	let success_cb = options.success;
-	let error_cb = options.error;
-	let uploadProgress = options.uploadProgress;
-	let method = options.type || 'GET';
-	// if (!DEV_WITH_PHP){ //临时处理 json-server会改变返回的数据
-	// 	method = 'GET';
-	// }
-	method = method.toUpperCase(); //默认转化为大写
-	if (!url) {
-		console.error('请求地址不存在');
-	}
 
-	let cgiSt = Date.now();
+let cancel;
 
-	let onDataReturn = data => {
-		switch (data.status) {
-			case 0:
-				error_cb && error_cb(data);
+const httpServer = axios.create({
+	// baseURL: $url.webUrl,
+	timeout: 10000,
+	responseType: 'json',
+	headers: {
+		// 'X-Requested-With': 'XMLHttpRequest',
+		'Content-Type': 'application/x-www-form-urlencoded'
+	},
+	withCredentials: true,  // 设置 withCredentials 使请求带上 `cookies` 
+	cancelToken: new axios.CancelToken(function (c) {
+		cancel = c;  // 记录当前请求的取消方法
+	})
+});
+
+httpServer.interceptors.request.use(config => {
+	return config;
+}, err => {
+	return Promise.reject(err);
+});
+
+httpServer.interceptors.response.use(response => {
+	if (response.data.code == -9999) {
+		delCookie('userId');
+		setTimeout(() => {
+			location.reload();
+		}, 1000);
+	}
+	return response.data;
+}, err => {
+	console.log(err);
+	if (err && err.response) {
+		switch (err.response.status) {
+			case 400:
+				err.message = '错误请求';
+				break;
+			case 401:
+				err.message = '未授权，请重新登录';
+				break;
+			case 403:
+				err.message = '拒绝访问';
+				break;
+			case 404:
+				err.message = '请求错误,未找到该资源';
+				break;
+			case 405:
+				err.message = '请求方法未允许';
+				break;
+			case 408:
+				err.message = '请求超时';
+				break;
+			case 500:
+				err.message = '服务器端出错';
+				break;
+			case 501:
+				err.message = '网络未实现';
+				break;
+			case 502:
+				err.message = '网络错误';
+				break;
+			case 503:
+				err.message = '服务不可用';
+				break;
+			case 504:
+				err.message = '网络超时';
+				break;
+			case 505:
+				err.message = 'http版本不支持该请求';
+				break;
 			default:
-				success_cb && success_cb(data);
+				err.message = `连接错误${err.response.status}`;
 		}
-	};
-
-	/**
-	 * 如果本地已经从别的地方获取到数据，就不用请求了
-	 */
-	if (options.localData) {
-		onDataReturn(options.localData);
-		return;
+	} else {
+		err.message = "连接到服务器失败";
 	}
+	return Promise.resolve(err.response);
+});
 
-	try {
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4) {
-				if (xhr.status >= 200 && xhr.status < 300) {
-					let data = JSON.parse(xhr.responseText);
-					onDataReturn(data);
-				} else {
-					error_cb && error_cb({
-						retcode: xhr.status,
-						msg: '数据异常->(The xhrStatus is not 200)'
-					});
-				}
-			}
-		};
-
-		let paramArray = [],
-			paramString = '';
-		for (let key in paramObj) {
-			/**
-			 * 过滤掉值为null,undefined,''情况
-			 */
-			if (paramObj[key] || paramObj[key] === false || paramObj[key] === 0) {
-				paramArray.push(key + '=' + encodeURIComponent(paramObj[key]));
-			}
-		}
-
-		if (method === 'FORM') {
-			let formData = new FormData();　　　　
-			formData.append('file', paramObj['file']);
-			xhr.open('POST', url);
-			xhr.withCredentials = true;　　　　
-			xhr.send(formData);
-		} else if (method === 'JSONP') {
-			method = 'GET';
-
-			if (!paramObj['callback']) {
-				error_cb && error_cb({
-					status: 0
-				});
-			}
-
-			window[paramObj['callback']] = function(data) {
-				onDataReturn(data);
-			};
-			if (paramArray.length > 0) {
-				url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
-			}
-			let script = document.createElement("script");
-			let head = document.getElementsByTagName("head")[0];
-			script.src = url;
-			head.appendChild(script);
-		} else {
-			if (method === 'GET') {
-				if (paramArray.length > 0) {
-					url += (url.indexOf('?') > -1 ? '&' : '?') + paramArray.join('&');
-				}
-			}
-			xhr.open(method, url, true);
-			xhr.withCredentials = true;
-			xhr.setRequestHeader(
-				'Content-type', 'application/x-www-form-urlencoded'
-			);
-			xhr.send(method === 'POST' ? paramArray.join('&') : '');
-		}
-
-	} catch (e) {
-		console.error(e);
-	}
-};
-
-export default ajaxFn;
+export default httpServer;
