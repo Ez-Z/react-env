@@ -13,24 +13,19 @@ const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.base.c
 const rm = require('rimraf');//删除文件夹
 
 rm(path.resolve(APP_ROOT, 'dist'), err => {
-  if (err) throw err
-  webpack(webpackConfig, function (err, stats) {
-	spinner.stop()
-	if (err) throw err
-	process.stdout.write(stats.toString({
-	  	colors: true,
-	  	modules: false,
-	  	children: false,
-	  	chunks: false,
-	  	chunkModules: false
-	}) + '\n\n');
+	if (err) throw err;
+	webpack(webpackConfig, function (err, stats) {
+		if (err) throw err;
+		process.stdout.write(stats.toString({
+			colors: true,
+			modules: false,
+			children: false,
+			chunks: false,
+			chunkModules: false
+		}) + '\n\n');
 
-	console.log(chalk.cyan('  Build complete.\n'))
-	console.log(chalk.yellow(
-	  '  Tip: built files are meant to be served over an HTTP server.\n' +
-	  '  Opening index.html over file:// won\'t work.\n'
-	));
-  });
+		
+	});
 });
 
 let webpackConfig = {
