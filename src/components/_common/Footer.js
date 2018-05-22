@@ -10,7 +10,7 @@ class Footer extends Component {
     render() {
     	
     	return (
-			<div className="common-footer">
+			<div className="com-footer">
 				<h1>我是footer</h1>
 			</div>
 		);

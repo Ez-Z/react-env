@@ -1,22 +1,26 @@
 import React, { Fragment } from 'react';
-import {
-  Route
-} from 'react-router-dom';
-import LazyLoad from '@common/LazyLoad/LazyLoad'; //按需加载容器组件
-import PrivateRoute from './PrivateRoute';
+import { Provider } from 'react-redux';
 
+import configureStore from '../stores/configureStore';
 
-const Home = LazyLoad(() => import('../containers/Home/Home'));
-const Test = LazyLoad(() => import('../containers/Test/Test'));
-const Login = LazyLoad(() => import('../containers/Login/Login'));
+import RoutesConfig from './RoutesConfig'; // 登录状态判断
+
+import Header from '@common/Header';
+import Footer from '@common/Footer';
+
+const store = configureStore();
 
 const Routes = (props) => {
 	return (
-		<Fragment>
-			<PrivateRoute exact path="/" component={Home} />
-			<PrivateRoute path="/test" component={Test} />
-			<Route path="/login" component={Login} />
-		</Fragment>
+		<Provider store={store}>
+			<Fragment>
+				{ location.href.indexOf('login') < 0 && <Header name="111" /> }
+				<div className="com-container">
+					<RoutesConfig />
+				</div>
+				<Footer />
+			</Fragment>
+		</Provider>
 	);
 };
 

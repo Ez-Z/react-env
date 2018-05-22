@@ -7,6 +7,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const StyleLintPlugin = require('stylelint-webpack-plugin');
 
@@ -45,6 +46,9 @@ let webpackConfig = {
 			additionalFormatters: [],
 			additionalTransformers: []
 		}),
+		new OpenBrowserPlugin({
+			url: `http://${localIp}:${localPort}`
+		})
 		/**
 		 * StyleLint
 		 */

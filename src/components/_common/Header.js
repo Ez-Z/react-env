@@ -13,7 +13,7 @@ class Header extends Component {
 			name,
 		} = this.props;
     	return (
-			<div className="common-header">
+			<div className="com-header">
 				<h1>
 					<Link to="/">
 						logo返回首页
