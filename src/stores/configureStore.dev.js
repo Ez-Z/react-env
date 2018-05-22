@@ -12,7 +12,7 @@ function getDebugSessionKey() {
 	const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
 	return (matches && matches.length > 0) ? matches[1] : null;
 }
-let finalCreateStore = null
+let finalCreateStore = null;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 if (composeEnhancers) {
 	finalCreateStore = composeEnhancers(
@@ -32,7 +32,7 @@ export default function configureStore(initialState) {
 
 	const store = finalCreateStore(rootReducer, initialState);
 
-	//热替换选项
+	// 热替换选项
 	if (module.hot) {
 		module.hot.accept('./reducers/rootReducer', () => {
 			const nextRootReducer = require('./reducers/rootReducer').default;

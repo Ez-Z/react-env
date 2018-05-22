@@ -4,17 +4,17 @@ import pureRender from 'pure-render-decorator';
 @pureRender
 class Footer extends Component {
 	constructor() {
-        super();
-    }
+		super();
+	}
 	
-    render() {
+	render() {
     	
     	return (
 			<div className="com-footer">
 				<h1>我是footer</h1>
 			</div>
 		);
-    }
+	}
 	
 };
 export default Footer;

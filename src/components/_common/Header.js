@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 import pureRender from 'pure-render-decorator';
 @pureRender
 class Header extends Component {
 	constructor() {
-        super();
-    }
+		super();
+	}
 	
-    render() {
+	render() {
     	const {
 			name,
 		} = this.props;
@@ -30,7 +30,7 @@ class Header extends Component {
 				
 			</div>
 		);
-    }
+	}
 	
 };
 
