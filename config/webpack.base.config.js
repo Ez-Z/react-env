@@ -95,7 +95,7 @@ const baseConfig = {
 			'@utils': path.resolve(APP_ROOT, 'src/utils'),
 		}
 	},
-	//入口
+	// 入口
 	entry: {
 		app: path.resolve(APP_ROOT, 'src/main.js'),
 	},
@@ -146,7 +146,7 @@ const baseConfig = {
 
 	// 插件
 	plugins: [
-		//单独抽离css文件
+		// 单独抽离css文件
 		new ExtractTextPlugin({
 			filename: 'statics/css/initial.[name].[hash:8].css',
 			allChunks: true
