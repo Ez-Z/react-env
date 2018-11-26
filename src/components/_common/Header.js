@@ -22,7 +22,7 @@ class Header extends Component {
 				<div>
 
 					<span><Link to="/">Home</Link> </span>
-					<span><Link to="/test">test</Link> </span>
+					<span><Link to="/test/2">test</Link> </span>
 					<span>
 						<span className="_name">我是{name} </span>
 					</span>

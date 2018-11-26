@@ -9,7 +9,7 @@ import {
 
 import './statics/css/common';
 
-import Routes from './router/Routes';
+import Routes from './router';
 
 
 
