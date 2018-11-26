@@ -96,9 +96,7 @@ const baseConfig = {
 		}
 	},
 	// 入口
-	entry: {
-		app: path.resolve(APP_ROOT, 'src/main.js'),
-	},
+	entry: ["babel-polyfill", path.resolve(APP_ROOT, 'src/main.js')],
 	optimization: {
 		// 默认关闭压缩
 		minimize: ENV_IS_DEV ? false : true,

@@ -16,22 +16,23 @@ import pureRender from 'pure-render-decorator';
 class Home extends Component {
 	constructor() {
 		super();
-		this.state = {
-			message: "Hello, world!!"
-		};
-		this.handleClick = ::this.handleClick;
 	}
-	handleClick() {
+
+	state = {
+		message: "Hello, world!!"
+	};
+
+	handleClick = () => {
 		this.props.actions.testAction('sss');
 		// this.props.history.push({
 		//      pathname: '/test',
 		// });
 	}
+
 	render() {
 		let {
 			message
 		} = this.state;
-		// console.log(this.props);
 		const { actions, test, loginInfo } = this.props;
 		return (
 			<Fragment>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
@@ -43,6 +44,7 @@ class Home extends Component {
 		);
 	}
 }
+
 function mapStateToProps(state) {
 	return {
 		test: state.testMain,

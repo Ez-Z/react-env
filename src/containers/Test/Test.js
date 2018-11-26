@@ -5,10 +5,13 @@ import ReactDOM from 'react-dom';
 class Test extends Component {
 	constructor() {
 		super();
-		this.state = {
-			message: "Hello, test"
-		};
 	}
+	
+	state = {
+		message: "Hello, test"
+	};
+
+
 	render() {
 		let {
 			message

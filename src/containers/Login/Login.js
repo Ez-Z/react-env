@@ -15,16 +15,24 @@ import * as loginInfoAction from '@actions/loginInfo/actions';
 class Login extends Component {
 	constructor() {
 		super();
-		this.state = {
-			message: "Hello, login",
-		};
-		this.handleClick = ::this.handleClick;
 	}
-	handleClick() {
+	state = {
+		message: "Please login",
+	}
+
+	handleClick = async () => {
+		let nowTime = await this.getTime();
+		console.log(nowTime);
 		setCookie('isLogin', true);
 		this.props.history.push({
 			pathname: '/',
 		});
+		return nowTime;
+	}
+	getTime = () => {
+		return new Promise(resolve => {
+			setTimeout(() => resolve("long_time_value"), 2000);
+		});			
 	}
 	render() {
 		let isLogin = getCookie('isLogin');
