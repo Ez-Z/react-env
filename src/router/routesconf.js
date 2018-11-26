@@ -1,6 +1,6 @@
-import LazyLoad from '@common/LazyLoad/LazyLoad'; // 按需加载容器组件
-const Home = LazyLoad(() => import('../containers/Home/Home'));
-const Test = LazyLoad(() => import('../containers/Test/Test'));
+import asyncComponent from '@common/asyncComponent'; // 按需加载容器组件
+const Home = asyncComponent(() => import('../containers/Home/Home'));
+const Test = asyncComponent(() => import('../containers/Test/Test'));
 
 const routes =  [
 	{

@@ -93,6 +93,7 @@ const baseConfig = {
 			'@containers': path.resolve(APP_ROOT, 'src/containers'),
 			'@images': path.resolve(APP_ROOT, 'src/statics/images'),
 			'@utils': path.resolve(APP_ROOT, 'src/utils'),
+			'@router': path.resolve(APP_ROOT, 'src/router'),
 		}
 	},
 	// 入口

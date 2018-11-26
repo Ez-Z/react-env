@@ -3,14 +3,14 @@ import {
 	Route
 } from 'react-router-dom';
 
-import LazyLoad from '@common/LazyLoad/LazyLoad'; // 按需加载容器组件
+import asyncComponent from '@common/asyncComponent'; // 按需加载容器组件
 import PrivateRoute from './PrivateRoute'; // 登录状态判断
 
 import routeconf from './routesconf';
 
-// const Home = LazyLoad(() => import('../containers/Home/Home'));
-// const Test = LazyLoad(() => import('../containers/Test/Test'));
-const Login = LazyLoad(() => import('../containers/Login/Login'));
+// const Home = asyncComponent(() => import('../containers/Home/Home'));
+// const Test = asyncComponent(() => import('../containers/Test/Test'));
+const Login = asyncComponent(() => import('../containers/Login/Login'));
 
 const RoutesConfig = (props) => {
 	return (
