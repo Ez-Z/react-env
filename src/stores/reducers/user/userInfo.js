@@ -1,15 +1,15 @@
-import * as types from '../../actions/loginInfo/types';
+import types from '@/constants';
 const initialState = {
 	isLogin: false,
 	userName: null
 };
-export const loginInfo = (state = initialState, action) => {
+export const userInfo = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case types.LOGIN_INFO_GET:
 			newState = {
 				...state,
-				...action.loginInfo
+				...action.payload
 			};			
 			return newState;
 		default:

@@ -3,6 +3,7 @@ import rootReducer from './reducers/rootReducer';
 import thunk from 'redux-thunk';
 import { persistState } from 'redux-devtools';
 import DevTools from '@common/DevTools';
+import logger from 'redux-logger';
 // import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 
 
@@ -17,11 +18,13 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 if (composeEnhancers) {
 	finalCreateStore = composeEnhancers(
 		applyMiddleware(thunk),
+		applyMiddleware(logger),
 		persistState(getDebugSessionKey())
 	)(createStore);
 } else  {
 	finalCreateStore = compose(
 		applyMiddleware(thunk),
+		applyMiddleware(logger),
 		DevTools.instrument(),
 		persistState(getDebugSessionKey())
 	)(createStore);

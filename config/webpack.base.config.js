@@ -8,9 +8,9 @@ const webpackMerge = require('webpack-merge');
 
 const localPort = (() => {
 	if (ENV_IS_DEV) {
-		return 8000;
+		return 8088;
 	} else {
-		return 9000;
+		return 9099;
 	}
 })();
 
@@ -87,6 +87,7 @@ const baseConfig = {
 			'redux': path.resolve(APP_ROOT, 'node_modules/redux/dist/redux.min.js'),
 			'babel-polyfill': path.resolve(APP_ROOT, 'node_modules/babel-polyfill/dist/polyfill.min.js'),
 			// 主端
+			'@': path.resolve(APP_ROOT, 'src'),
 			'@common': path.resolve(APP_ROOT, 'src/components/_common'),
 			'@actions': path.resolve(APP_ROOT, 'src/stores/actions'),
 			'@components': path.resolve(APP_ROOT, 'src/components'),

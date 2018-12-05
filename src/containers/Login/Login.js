@@ -9,8 +9,6 @@ import { Button } from 'antd';
 import { setCookie, getCookie } from '@utils/utils';
 
 
-import * as loginInfoAction from '@actions/loginInfo/actions';
-
 
 class Login extends Component {
 	constructor() {
