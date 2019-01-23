@@ -98,7 +98,7 @@ const baseConfig = {
 		}
 	},
 	// 入口
-	entry: ["babel-polyfill", path.resolve(APP_ROOT, 'src/main.js')],
+	entry: ["babel-polyfill", path.resolve(APP_ROOT, 'src/index.js')],
 	optimization: {
 		// 默认关闭压缩
 		minimize: ENV_IS_DEV ? false : true,
@@ -193,7 +193,7 @@ const baseConfig = {
 
 			},
 			{
-				test: /\.(scss|css)$/,
+				test: /\.(css|scss)$/,
 				include: [path.resolve(APP_ROOT, "src/statics/css"), path.resolve(APP_ROOT, "src/components")],
 				exclude: [path.resolve(APP_ROOT, "node_modules")],
 				use: ExtractTextPlugin.extract({
