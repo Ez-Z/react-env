@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import {
 	Redirect
@@ -10,7 +10,7 @@ import { setCookie, getCookie } from '@utils/utils';
 
 
 
-class Login extends Component {
+class Login extends PureComponent {
 	constructor() {
 		super();
 	}

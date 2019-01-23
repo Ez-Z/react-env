@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import test from './test';
-import user from './user';
-import counter from '../../models/counter';
+import counter from '../models/counter';
 
 const Models = [
   counter
@@ -23,10 +21,6 @@ function getReducers(models) {
   return reducers;
 }
 
-const rootReducer = combineReducers({
-	...test,
-	...user,
-  	...getReducers([...Models]),
+export default combineReducers({
+  ...getReducers([...Models])
 });
-
-export default rootReducer;

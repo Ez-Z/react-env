@@ -5,9 +5,15 @@ import { persistState } from 'redux-devtools';
 import DevTools from '@common/DevTools';
 import logger from 'redux-logger';
 // import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import createSagaMiddleware from "redux-saga";
 
 
 // const RouterMiddleware = routerMiddleware(history);
+
+// sagas 
+import rootSagas from './sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 function getDebugSessionKey() {
 	const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
@@ -19,12 +25,14 @@ if (composeEnhancers) {
 	finalCreateStore = composeEnhancers(
 		applyMiddleware(thunk),
 		applyMiddleware(logger),
+		applyMiddleware(sagaMiddleware),
 		persistState(getDebugSessionKey())
 	)(createStore);
 } else  {
 	finalCreateStore = compose(
 		applyMiddleware(thunk),
 		applyMiddleware(logger),
+		applyMiddleware(sagaMiddleware),
 		DevTools.instrument(),
 		persistState(getDebugSessionKey())
 	)(createStore);
@@ -34,7 +42,7 @@ if (composeEnhancers) {
 export default function configureStore(initialState) {
 
 	const store = finalCreateStore(rootReducer, initialState);
-
+	sagaMiddleware.run(rootSagas);
 	// 热替换选项
 	if (module.hot) {
 		module.hot.accept('./reducers/rootReducer', () => {

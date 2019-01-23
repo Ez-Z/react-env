@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 
 
-class Test extends Component {
+class Test extends PureComponent {
 	constructor() {
 		super();
 	}
