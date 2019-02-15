@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent, Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
 	bindActionCreators
@@ -11,8 +11,12 @@ import * as TestAction from '@actions/test';
 import { Button } from 'antd';
 import trophy from '@images/trophy.png';
 
+import HooksTest from './HooksTest';
+import DndTest from './DndTest';
+import Editor from './Editor';
 
-@connect(({testMain, userInfo, counter}) => ({
+
+@connect(({ testMain, userInfo, counter }) => ({
 	test: testMain,
 	userInfo: userInfo,
 	num: counter.num
@@ -40,7 +44,6 @@ class Home extends PureComponent {
 		let {
 			message
 		} = this.state;
-		console.log(this.props);
 		const {
 			actions,
 			test,
@@ -59,6 +62,9 @@ class Home extends PureComponent {
 					<Button size="large" onClick={() => dispatch({type: 'counter/add'}) }>+</Button>
 					<Button size="large" onClick={() => dispatch({type: 'counter/minus'}) }>-</Button>
 				</div>
+				<HooksTest />
+				<DndTest />
+				<Editor />
 			</Fragment>
 		);
 	}

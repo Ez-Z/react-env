@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 
-import './statics/css/common';
+import './statics/css/common.scss';
 
 import App from './App';
 

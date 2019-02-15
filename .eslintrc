@@ -18,7 +18,8 @@
 	"plugins": [
 		"react",
 		"markdown",
-		"babel"
+		"babel",
+		"react-hooks"
 	],
 	"parser": "babel-eslint",
 	"rules":

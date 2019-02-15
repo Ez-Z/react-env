@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
+import './b.scss';
+
 import pureRender from 'pure-render-decorator';
 @pureRender
 class Header extends Component {
@@ -24,7 +26,7 @@ class Header extends Component {
 					<span><Link to="/">Home</Link> </span>
 					<span><Link to="/test/2">test</Link> </span>
 					<span>
-						<span className="_name">我是{name} </span>
+						<span className="_name b">我是{name} </span>
 					</span>
 				</div>
 				

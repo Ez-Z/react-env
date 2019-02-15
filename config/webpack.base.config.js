@@ -73,7 +73,7 @@ const baseConfig = {
 	resolve: {
 		mainFiles: ['index.web', 'index'],
 		modules: [path.resolve(APP_ROOT, 'src'), 'node_modules'],
-		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.scss'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
 		alias: {
 			// 依赖重定向
 			'react': path.resolve(APP_ROOT, 'node_modules/react/cjs/react.production.min.js'),
@@ -169,15 +169,6 @@ const baseConfig = {
 					}
 				}
 			},
-			// {
-			//     test: /\.css$/,
-			//     include: [path.resolve(APP_ROOT, "src/statics/css")],
-			//     exclude: [path.resolve(APP_ROOT, "node_modules")],
-			//     use: ExtractTextPlugin.extract({
-			//         fallback: 'style-loader',
-			//         use: ['css-loader', 'postcss-loader']
-			//     })
-			// },
 			{
 				test: /\.less$/,
 				use: [
@@ -194,8 +185,8 @@ const baseConfig = {
 			},
 			{
 				test: /\.(css|scss)$/,
-				include: [path.resolve(APP_ROOT, "src/statics/css"), path.resolve(APP_ROOT, "src/components")],
-				exclude: [path.resolve(APP_ROOT, "node_modules")],
+				// include: [path.resolve(APP_ROOT, "src")],
+				// exclude: [path.resolve(APP_ROOT, "node_modules")],
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: ['css-loader',
