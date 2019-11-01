@@ -7,21 +7,14 @@ import {
 	connect
 } from 'react-redux';
 
-import * as TestAction from '@actions/test';
 import { Button } from 'antd';
 import trophy from '@images/trophy.png';
 
 import HooksTest from './components/HooksTest';
-// import DndTest from './DndTest';
-// import Editor from './components/Editor';
 
-
-@connect(({ testMain, userInfo, counter }) => ({
-	test: testMain,
-	userInfo: userInfo,
+@connect(({ counter }) => ({
 	num: counter.num
 }), (dispatch) => ({
-	actions: bindActionCreators(TestAction, dispatch),
 	dispatch
 }))
 class Home extends PureComponent {
@@ -34,41 +27,33 @@ class Home extends PureComponent {
 	};
 
 	handleClick = () => {
-		this.props.actions.testAction('sss');
-		// this.props.history.push({
-		//      pathname: '/test',
-		// });
+		const {
+			num,
+			history,
+		} = this.props;
+		history.push({
+			pathname: `/test/${num}`,
+		});
 	}
 
 	render() {
-		let {
-			message
-		} = this.state;
 		const {
-			actions,
-			test,
-			userInfo,
 			num,
 			dispatch
 		} = this.props;
 		return (
 			<>
-				{/* <h1>{userInfo.userName}</h1> */}
-				<img src={trophy} alt=""/>
-				{test.testData && <h1>{test.testData}</h1>}
-				<Button type="primary" size="large" onClick={this.handleClick}>Primary</Button>
+				<img src={trophy} alt="" />
+				<Button type="primary" size="large" onClick={this.handleClick}>gotoTest</Button>
 				<div className="counter">
 					<p>{num}</p>
-					<Button size="large" onClick={() => dispatch({type: 'counter/add'}) }>+</Button>
-					<Button size="large" onClick={() => dispatch({type: 'counter/minus'}) }>-</Button>
+					<Button size="large" onClick={() => dispatch({ type: 'counter/add' })}>+</Button>
+					<Button size="large" onClick={() => dispatch({ type: 'counter/minus' })}>-</Button>
 				</div>
 				<HooksTest />
 			</>
 		);
 	}
 }
-
-
-
 
 export default Home;

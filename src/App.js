@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
-
-import configureStore from './stores/configureStore';
-
-import Routes from '@router/Routes'; // 登录状态判断
+// import configureStore from './stores/configureStore';
+import Routes from '@router/Routes';
 
 import Header from '@common/Header';
 import Footer from '@common/Footer';
 
-const store = configureStore();
+import dva from './utils/dva';
+import models from './models';
+
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models,
+});
+const store = dvaApp.getStore();
+
+// const store = configureStore();
 
 const App = (props) => {
 	return (

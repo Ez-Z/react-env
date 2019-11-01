@@ -1,6 +1,6 @@
 import loadable from '@loadable/component';
 const Home = loadable(() => import('../containers/Home/Home'));
-const Test = loadable(() => import('../containers/Test/Test'));
+const Test = loadable(() => import('../containers/Test'));
 
 
 // import asyncComponent from '@common/asyncComponent'; // 动态加载容器组件
