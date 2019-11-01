@@ -1,6 +1,11 @@
-import asyncComponent from '@common/asyncComponent'; // 按需加载容器组件
-const Home = asyncComponent(() => import('../containers/Home/Home'));
-const Test = asyncComponent(() => import('../containers/Test/Test'));
+import loadable from '@loadable/component';
+const Home = loadable(() => import('../containers/Home/Home'));
+const Test = loadable(() => import('../containers/Test/Test'));
+
+
+// import asyncComponent from '@common/asyncComponent'; // 动态加载容器组件
+// const Home = asyncComponent(() => import('../containers/Home/Home'));
+// const Test = asyncComponent(() => import('../containers/Test/Test'));
 
 const routes =  [
 	{

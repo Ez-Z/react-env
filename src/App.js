@@ -13,13 +13,13 @@ const store = configureStore();
 const App = (props) => {
 	return (
 		<Provider store={store}>
-			<Fragment>
+			<>
 				{location.href.indexOf('login') < 0 && <Header name="111" />}
 				<div className="com-container">
 					<Routes />
 				</div>
 				{location.href.indexOf('login') < 0 && <Footer />}
-			</Fragment>
+			</>
 		</Provider>
 	);
 };

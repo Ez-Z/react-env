@@ -43,10 +43,10 @@ class Login extends PureComponent {
 		}
         
 		return (
-			<Fragment>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
+			<>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
 				<h1>{message}</h1>
 				<Button type="primary" size="large" onClick={this.handleClick}>登录</Button>
-			</Fragment>
+			</>
 		);
 	}
 }

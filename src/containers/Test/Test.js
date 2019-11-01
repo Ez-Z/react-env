@@ -21,9 +21,9 @@ class Test extends PureComponent {
 		} = this.props.match.params;
 		console.log(this.props);
 		return (
-			<Fragment>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
+			<>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
 				<h1>{message} {id}</h1>
-			</Fragment>
+			</>
 		);
 	}
 }

@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import pureRender from 'pure-render-decorator';
+import React, { PureComponent } from 'react';
 
-@pureRender
-class Footer extends Component {
+class Footer extends PureComponent {
 	constructor() {
 		super();
 	}

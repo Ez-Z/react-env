@@ -11,9 +11,9 @@ import * as TestAction from '@actions/test';
 import { Button } from 'antd';
 import trophy from '@images/trophy.png';
 
-import HooksTest from './HooksTest';
-import DndTest from './DndTest';
-import Editor from './Editor';
+import HooksTest from './components/HooksTest';
+// import DndTest from './DndTest';
+// import Editor from './components/Editor';
 
 
 @connect(({ testMain, userInfo, counter }) => ({
@@ -52,7 +52,7 @@ class Home extends PureComponent {
 			dispatch
 		} = this.props;
 		return (
-			<Fragment>{/* 片段，用于多个子元素的包裹，减少不必要的标签*/}
+			<>
 				{/* <h1>{userInfo.userName}</h1> */}
 				<img src={trophy} alt=""/>
 				{test.testData && <h1>{test.testData}</h1>}
@@ -63,9 +63,7 @@ class Home extends PureComponent {
 					<Button size="large" onClick={() => dispatch({type: 'counter/minus'}) }>-</Button>
 				</div>
 				<HooksTest />
-				<DndTest />
-				<Editor />
-			</Fragment>
+			</>
 		);
 	}
 }
