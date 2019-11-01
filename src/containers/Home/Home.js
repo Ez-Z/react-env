@@ -14,8 +14,6 @@ import HooksTest from './components/HooksTest';
 
 @connect(({ counter }) => ({
 	num: counter.num
-}), (dispatch) => ({
-	dispatch
 }))
 class Home extends PureComponent {
 	constructor() {
