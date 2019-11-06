@@ -1,11 +1,7 @@
 import React, { PureComponent, Fragment, useState } from 'react';
-import ReactDOM from 'react-dom';
-import {
-	bindActionCreators
-} from 'redux';
 import {
 	connect
-} from 'react-redux';
+} from 'dva';
 
 import { Button } from 'antd';
 import trophy from '@images/trophy.png';
