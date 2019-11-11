@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.scss';
-import './b.scss';
+import './Header.less';
+import './b.less';
 
 class Header extends PureComponent {
 	constructor() {

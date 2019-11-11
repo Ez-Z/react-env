@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 
-import './statics/css/common.scss';
+import './statics/css/common.less';
 
 import App from './Layout';
 

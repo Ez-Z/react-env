@@ -1,10 +1,10 @@
-import React, { PureComponent, Fragment, useState } from 'react';
+import React, { PureComponent } from 'react';
 import {
 	connect
 } from 'dva';
 
 import { Button } from 'antd';
-import trophy from '@images/trophy.png';
+// import trophy from '@images/trophy.png';
 
 import HooksTest from './components/HooksTest';
 
@@ -37,7 +37,7 @@ class Home extends PureComponent {
 		} = this.props;
 		return (
 			<>
-				<img src={trophy} alt="" />
+				{/* <img src={trophy} alt="" /> */}
 				<Button type="primary" size="large" onClick={this.handleClick}>gotoTest</Button>
 				<div className="counter">
 					<p>{num}</p>
