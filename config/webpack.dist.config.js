@@ -69,18 +69,19 @@ let webpackConfig = {
 		 * 优化
 		 * webPack 提供了内建插件，直接配置以下代码即可压缩代码.同 -p 显示打包后文件大小
 		 */
-		// new BundleAnalyzerPlugin({
-		//     analyzerMode: 'static', // static 生成html文件 | server 一直监听 | disabled 生成json文件
-		//     // analyzerHost: localIp,
-		//     // analyzerPort: bundleAnalyzerPort,
-		//     reportFilename: 'report.html',
-		//     defaultSizes: 'gzip',
-		//     openAnalyzer: false,
-		//     generateStatsFile: false,
-		//     // statsFilename: 'stats.json',
-		//     // statsOptions: null,
-		//     logLevel: 'info'
-		// }),
+		new BundleAnalyzerPlugin({
+		    analyzerMode: 'static', // static 生成html文件 | server 一直监听 | disabled 生成json文件
+		    // analyzerHost: localIp,
+		    // analyzerPort: bundleAnalyzerPort,
+		    reportFilename: 'report.html',
+		    defaultSizes: 'gzip',
+		    openAnalyzer: false,
+		    generateStatsFile: false,
+		    // statsFilename: 'stats.json',
+		    // statsOptions: null,
+		    logLevel: 'info'
+		}),
+		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
 		/**
 		 * webpack3.x 模块串联
 		 */

@@ -80,12 +80,11 @@ const baseConfig = {
 			'react-router-dom': path.resolve(APP_ROOT, 'node_modules/react-router-dom/umd/react-router-dom.min.js'),
 			'react-dom/server': path.resolve(APP_ROOT, 'node_modules/react-dom/server'),
 			'react-dom': path.resolve(APP_ROOT, 'node_modules/react-dom/cjs/react-dom.production.min.js'),
-			'dva': path.resolve(APP_ROOT, 'node_modules/dva/dist/dva.min.js'),
-			// 'react-redux': path.resolve(APP_ROOT, 'node_modules/react-redux/dist/react-redux.min.js'),
+			'react-redux': path.resolve(APP_ROOT, 'node_modules/react-redux/dist/react-redux.min.js'),
 			// 'pure-render-decorator': path.resolve(APP_ROOT, 'src/utils/pure-render-decorator'),
 			// 'react-router-redux': path.resolve(APP_ROOT, 'node_modules/react-router-redux/dist/ReactRouterRedux.min.js'),
 			// 'redux-thunk': path.resolve(APP_ROOT, 'node_modules/redux-thunk/dist/redux-thunk.min.js'),
-			'redux': path.resolve(APP_ROOT, 'node_modules/redux/dist/redux.min.js'),
+			// 'redux': path.resolve(APP_ROOT, 'node_modules/redux/dist/redux.min.js'),
 			'babel-polyfill': path.resolve(APP_ROOT, 'node_modules/babel-polyfill/dist/polyfill.min.js'),
 			// 主端
 			'@': path.resolve(APP_ROOT, 'src'),
@@ -120,10 +119,9 @@ const baseConfig = {
 							'react-dom',
 							'react-redux',
 							'react-router-dom',
-							'redux',
-							'redux-thunk',
+							// 'redux',
+							// 'redux-thunk',
 							'classnames',
-							'dva',
 						];
 						let isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
 						return chunk.resource

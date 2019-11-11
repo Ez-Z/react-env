@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {
 	connect
-} from 'dva';
+} from 'react-redux';
 
 import { Button } from 'antd';
 // import trophy from '@images/trophy.png';
