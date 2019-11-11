@@ -1,6 +1,6 @@
 # react-env
 
-技术栈：`react16 + react-router4 + webpack4 + redux + axios`
+技术栈：`react16 + react-router4 + webpack4 + dva + axios`
 
 安装依赖： `npm install`
 
